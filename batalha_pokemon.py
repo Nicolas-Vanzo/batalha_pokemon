@@ -1,5 +1,6 @@
 import requests
 
+
 def pegar_pokemon(nome):
     url = f"https://pokeapi.co/api/v2/pokemon/{nome.lower()}"
     resposta = requests.get(url)
@@ -30,9 +31,20 @@ def buscar_pokemon(nome):
     else:
         print("Pokémon não encontrado!")
 
+def pegar_ataque(url_move):
+        try:
+            r = requests.get(url_move, timeout=5)
+            if r.status_code == 200:
+                return r.json()
+        except requests.exceptions.RequestException:
+            return None 
 
+
+
+ #------- POKEMON DE ATAQUE -------
+ 
 while True:
-    # POKÉMON DE ATAQUE
+    
     nome_atk = input("\nDigite o nome do Pokémon de ataque (ou 'sair' para encerrar): ")
     if nome_atk.lower() == "sair":
         break
@@ -50,7 +62,10 @@ while True:
         for tipodano in tipo['damage_relations']['double_damage_to']:
             print("  Super efetivo contra:", tipodano['name'])
 
-    # POKÉMON DE DEFESA
+
+
+ #------- POKEMON DE DEFESA -------
+
     nome_def = input("\nDigite o nome do Pokémon de defesa (ou 'sair' para encerrar): ")
     if nome_def.lower() == "sair":
         break
@@ -66,20 +81,33 @@ while True:
     for tipo in tipos_def:
         print("Tipo:", tipo['name'])
 
-    # DANO
-    try:
-        dano = int(input('\nQuanto de dano vai sofrer? '))
-    except ValueError:
-        print("Digite um valor numérico para o dano!")
-        continue
-
-    dano_final = dano
-
     # Checa cada tipo de ataque contra cada tipo de defesa
     for tipo_atk in tipos_atk:
         for tipo_damage in tipo_atk['damage_relations']['double_damage_to']:
             for tipo_def in tipos_def:
                 if tipo_damage['name'] == tipo_def['name']:
                     dano_final *= 2  # dano dobrado
+
+    movimentos = pokemon_atk['moves']
+    if not movimentos:
+        print('Esse não tem movimentos cadastrados no PokeAPI.')
+        continue
+
+    print('Habilidades disponiveis: ')
+    for i, move in enumerate(movimentos[:7], 1):
+        print(f'{i}. {move['move']['name'].title()}')
+
+    while True:
+        try:
+            escolha = int(input('Escolha o numero do ataque:'))
+            if 1 <= escolha <=7:
+                ataque_escolhido = movimentos[escolha - 1]['move']['name']
+                url_ataque = movimentos [escolha - 1]['move']['url']
+                dados_ataque = pegar = pegar_ataque(url_ataque)
+                break
+            else:
+                print('Numero invalido, escolha novamente.')
+        except ValueError:
+            print('Digite um numero valido')
 
     print(f"\n{nome_atk.title()} causou {dano_final} de dano em {nome_def.title()}!\n")
