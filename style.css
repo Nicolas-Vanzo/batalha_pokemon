@@ -1,9 +1,40 @@
-.abacate{
-    width: auto;
-    color: darkturquoise;
+/* Estilo geral da página */
+body {
+  background-color: #b5cce0;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
 }
 
-.melancia{
-    height: auto;
-    color: darkturquoise;
+h1 {
+  color: darkred;
+}
+
+#inputs {
+  background-color: #dd9c9c;
+  border: 2px solid #b5cce0;
+  padding: 20px;
+  margin: 20px auto;
+  width: 300px;
+  border-radius: 10px; /* canto arredondado */
+}
+
+button {
+  background-color: rgba(241, 147, 104, 0.527);
+  border: 2px solid black;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#resultado {
+  margin-top: 30px;
+  background-color: #e6f7ff;
+  border: 2px solid #3399ff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }

@@ -5,15 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Batalha Pokemon</title>
     <link rel="stylesheet" href="style.css">
+    
 
 </head>
-<body>
-    <h1 class="abacate"> Ola mundo </h1>
-   
-    <p class = "melancia"> Ney ☻ </p>
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbXvmyZxTTgYqadK1kVMZZ4BC3ZEKfCjVOOQ&s"
-    alt="Imagem pokemon" class="abacate">
 
-    <div class = "abacate">  </div>
+<body>
+    <h1> Batalha Pokemon </h1>
+    <p> Digitei os dois pokemons para batalhar </p>
+    
+    <!-- caixa de inputs -->
+    <div id="inputs">
+        <label for="pokemonAtk"> Pokémon de Ataque: </label>
+        <input type="text" id="pokemonAtk" placeholder="Ex: Pikachu">
+
+        <br><br>
+
+        <label for="pokemonDef"> Pokémon de Defesa: </label>
+        <input type="text" id="pokemonDef" placeholder="Ex: Bulbasaur">
+
+        <br><br>
+
+        <button id="startBattle"> Iniciar Batalha </button>
+    </div>
+
+<!-- Caixa do resultado -->
+<div id="resultado">
+  <h2> Resultado: </h2>
+  <p> Aguardando batalha... </p>
+  
+  <script>
+  // Quando clicar no botão...
+  document.getElementById("startBattle").onclick = function() {
+    // Pegar o que foi digitado
+    let atacante = document.getElementById("pokemonAtk").value;
+    let defensor = document.getElementById("pokemonDef").value;
+
+    // Se os dois campos estiverem preenchidos
+    if (atacante && defensor) {
+      document.getElementById("resultado").innerHTML = 
+        "<h2>Resultado:</h2>" + atacante + " atacou " + defensor + "!";
+    } else {
+      document.getElementById("resultado").innerHTML = 
+        "<h2>Resultado:</h2>Digite os dois Pokémon!";
+    }
+  }
+</script>
+</div>
+
+
 </body>
 </html>
